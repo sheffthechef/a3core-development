@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -280,6 +280,164 @@
       main { padding: 1.5rem 1rem; }
       header { padding: 1rem; }
     }
+
+    .rom-card-tg {
+        background-color: #212121;
+        color: #ffffff;
+        border-radius: 12px;
+        padding: 20px 25px;
+        width: 100%;
+        max-width: 450px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        box-sizing: border-box;
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left;
+    }
+    .rom-card-tg .header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+    .rom-card-tg .status {
+        background-color: #4a4a4a;
+        color: #e0e0e0;
+        padding: 4px 8px;
+        border-radius: 6px;
+        font-size: 0.8em;
+        margin-right: 10px;
+    }
+    .rom-card-tg h1 {
+        font-size: 1.6em;
+        font-weight: 700;
+        color: #ffffff;
+        margin-top: 5px;
+        margin-bottom: 10px;
+    }
+    .rom-card-tg .details {
+        font-size: 0.95em;
+        line-height: 1.5;
+        color: #d0d0d0;
+        margin-bottom: 20px;
+    }
+    .rom-card-tg .details strong {
+        color: #ffffff;
+        font-weight: 600;
+    }
+    .rom-card-tg .warning {
+        background-color: #ffcc00;
+        color: #333333;
+        padding: 12px;
+        border-radius: 8px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+        text-align: center;
+        box-shadow: 0 0 8px #ffcc00;
+        animation: glow-animation 1.5s infinite alternate;
+        text-decoration: none;
+    }
+    .rom-card-tg .warning span {
+        font-size: 1.2em;
+        margin-right: 8px;
+    }
+    .rom-card-tg .link-section {
+        margin-bottom: 15px;
+    }
+    .rom-card-tg .link-section a {
+        color: #87ceeb;
+        text-decoration: none;
+        font-weight: 500;
+        display: block;
+        margin-bottom: 8px;
+        text-shadow: none;
+    }
+    .rom-card-tg .link-section a:hover {
+        text-decoration: underline;
+    }
+    .rom-card-tg .bug-section {
+        margin-top: 25px;
+        padding-top: 15px;
+        border-top: 1px solid #333333;
+    }
+    .rom-card-tg .bug-section h3 {
+        font-size: 1.1em;
+        color: #d0d0d0;
+        margin-bottom: 10px;
+    }
+    .rom-card-tg .bug-section ul.bug-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .rom-card-tg .bug-section ul.bug-list li {
+        color: #ff4d4d;
+        margin-bottom: 5px;
+        display: flex;
+        align-items: flex-start;
+        background: none;
+        border: none;
+        padding: 0;
+    }
+    .rom-card-tg .bug-section ul.bug-list li::before {
+        content: "⛔";
+        margin-right: 8px;
+        font-size: 1em;
+        line-height: 1.5;
+    }
+    .rom-card-tg .footer-links {
+        margin-top: 25px;
+        padding-top: 15px;
+        border-top: 1px solid #333333;
+        text-align: center;
+        font-size: 0.9em;
+        color: #888888;
+    }
+    .rom-card-tg .main-image {
+        width: 100%;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        object-fit: cover;
+    }
+    
+    .rom-card-tg .flash-guide {
+        margin-bottom: 20px;
+    }
+    .rom-card-tg .flash-guide h3 {
+        color: #d0d0d0;
+        font-size: 1.1em;
+        margin-bottom: 10px;
+    }
+    .rom-card-tg .flash-guide p {
+        font-size: 0.9em;
+        line-height: 1.6;
+        color: #c9d1d9;
+        margin: 0;
+    }
+    .rom-card-tg .flash-guide code {
+        background-color: #333;
+        color: #f1f1f1;
+        padding: 2px 5px;
+        border-radius: 4px;
+        font-family: 'Courier New', Courier, monospace;
+        display: block;
+        margin: 5px 0;
+        font-size: 0.95em;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+    }
+
+    @keyframes glow-animation {
+      from {
+        box-shadow: 0 0 8px #ffcc00;
+      }
+      to {
+        box-shadow: 0 0 18px #ffdd00, 0 0 25px #ffdd00;
+      }
+    }
   </style>
 </head>
 <body>
@@ -337,6 +495,64 @@
       <h2 data-key="romsTitle">ROMs</h2>
       <p data-key="romsDesc">Links to ROMs will be added soon.</p>
       <ul>
+        <li>
+            <div class="rom-card-tg">
+                <div class="header">
+                    <span class="status">Unofficial</span>
+                </div>
+        
+                <img src="/sources/LOS21TD.jpg" alt="Lineage OS 21" class="main-image">
+        
+                <h1>LineageOS 21 — UNOFFICIAL</h1>
+                <div class="details">
+                    Maintainer (not active): <strong>@Goofy_Ozy4</strong><br>
+                    Android: <strong>14</strong>; Security Patch: <strong>December, 2024</strong>
+                </div>
+        
+                <a href="installdisclaimer.html" class="warning">
+                    <span>⚠️</span> READ THIS BEFORE FLASHING <span>⚠️</span>
+                </a>
+        
+                <div class="link-section">
+                    <a href="https://github.com/GoofyOzy4/lineage-a3core-gsi/releases/download/v5/LOS21-V5-X-SystemOnly.zip">Download link (GitHub servers)</a>
+                </div>
+        
+                <div class="flash-guide">
+                    <h3>How to flash?</h3>
+                    <p>
+                        How to flash a GSI through recovery? <br>
+                        Guide: 1. After you unlocked your bootloader, you need to boot into Download Mode.<br>
+                        2. Using Download Mode, flash the custom recovery (that has fastbootd) into AP (in Odin) or --recovery (in Heimdall). If you have one already, skip this.<br>
+                        3. Enter the recovery, go to fastbootd, enter it.<br>
+                        4. Connect the device to the PC, on PC you should do this:<br>
+                        4.1. Install platform-tools for your OS (Windows, Linux)<br>
+                        4.2. Unpack it.<br>
+                        4.3. Open a command line in the platform tools folder, enter:<br>
+                        <code>fastboot delete-logical-partition product</code>
+                        <code>fastboot delete-logical-partition system_ext</code>
+                        These two commands will erase product and system_ext partition for system to have space for the GSI.<br>
+                        Now enter this to flash system:<br>
+                        <code>fastboot flash system NAME_OF_THE_IMAGE.img</code>
+                        Instead of the "NAME_OF_THE_IMAGE", enter the name of the system image you want to flash. It SHOULD be .img format. If you don't know what to flash, it's better to use Semi-GSI's from here. If you want to flash some other GSI, take a look on this guide<br>
+                        5. It will start flashing, after you flashed, you do a factory reset (in the recovery)<br>
+                        6. After factory reset is finished you can reboot into the system. Enjoy✅
+                    </p>
+                </div>
+        
+                <div class="bug-section">
+                    <h3>Known Bugs:</h3>
+                    <ul class="bug-list">
+                        <li>— VoLTE (NOT FIXABLE)</li>
+                    </ul>
+                </div>
+        
+                <div class="footer-links">
+                    <div class="link-section">
+                        <a href="https://t.me/A03Cdevelopment">Follow us! Or ask for support...</a>
+                    </div>
+                </div>
+            </div>
+        </li>
       </ul>
     </section>
 
@@ -477,4 +693,4 @@
     showPage('home');
   </script>
 </body>
-  </html>
+</html>
