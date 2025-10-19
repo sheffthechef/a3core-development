@@ -1,15 +1,480 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Test</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resources For The A03 Core</title>
+
   <style>
-    body{display:flex;align-items:center;justify-content:center;height:100vh;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;color:#111;background:#f7f7f7}
-    .box{padding:2rem 3rem;border-radius:12px;background:#fff;box-shadow:0 6px 18px rgba(0,0,0,0.08);font-size:2rem}
+    :root {
+      --bg-body: #0d1117;
+      --text-body: #e6edf3;
+      --bg-header: #161b22;
+      --border-color: #30363d;
+      
+      --accent-color: #00faff;
+      --accent-shadow: none;
+      
+      --text-h1: var(--accent-color);
+      --text-h2: var(--accent-color);
+      --link-color: var(--accent-color);
+      
+      --bg-btn: #21262d;
+      --text-btn: #c9d1d9;
+      --bg-btn-hover: #30363d;
+      --text-btn-hover: var(--accent-color);
+      --text-footer: #8b949e;
+      --text-p: #c9d1d9;
+      --bg-li: #161b22;
+      --bg-code: #0b1220;
+      --text-code: #9be3ff;
+      --btn-control-border: #30363d;
+    }
+
+    body.light-theme {
+      --bg-body: #ffffff;
+      --text-body: #1f2328;
+      --bg-header: #f6f8fa;
+      --border-color: #d0d7de;
+
+      --accent-color: #007acc;
+      --accent-shadow: none;
+
+      --text-h1: var(--accent-color);
+      --text-h2: var(--accent-color);
+      --link-color: var(--accent-color);
+
+      --bg-btn: #f6f8fa;
+      --text-btn: #1f2328;
+      --bg-btn-hover: #eaeef2;
+      --text-btn-hover: var(--accent-color);
+      --text-footer: #57606a;
+      --text-p: #1f2328;
+      --bg-li: #f6f8fa;
+      --bg-code: #eaeef2;
+      --text-code: #0d4a9b;
+      --btn-control-border: #d0d7de;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background-color: var(--bg-body);
+      color: var(--text-body);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    header {
+      background-color: var(--bg-header);
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+      position: sticky;
+      top: 0;
+      z-index: 998;
+    }
+
+    .header-title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    header h1 { 
+      font-size: 1.25rem; 
+      color: var(--text-h1); 
+      text-shadow: var(--accent-shadow);
+      transition: text-shadow 0.2s ease;
+    }
+    
+    #back-to-home {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text-btn);
+      cursor: pointer;
+      padding: 0.25rem;
+    }
+    #back-to-home svg {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
+    }
+    #back-to-home:hover {
+      color: var(--accent-color);
+    }
+    
+    #menu-toggle {
+      background: none;
+      border: none;
+      color: var(--text-btn);
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+    #menu-toggle svg {
+      width: 24px;
+      height: 24px;
+      fill: currentColor;
+    }
+    #menu-toggle:hover {
+      color: var(--accent-color);
+    }
+    
+    #menu-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 999;
+    }
+    
+    body.menu-open #menu-overlay {
+      display: block;
+    }
+
+    #menu-container {
+      position: fixed;
+      top: 0;
+      right: -280px;
+      width: 250px;
+      height: 100vh;
+      background-color: var(--bg-header);
+      border-left: 1px solid var(--border-color);
+      padding: 1.5rem;
+      z-index: 1000;
+      transition: right 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+    
+    body.menu-open #menu-container {
+      right: 0;
+    }
+
+    #menu-container nav {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    #menu-container nav button {
+      background: var(--bg-btn);
+      color: var(--text-btn);
+      border: 1px solid var(--border-color);
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.18s ease, color 0.18s ease, transform 0.12s ease, border-color 0.2s ease, text-shadow 0.2s ease;
+      width: 100%;
+      text-align: left;
+    }
+
+    #menu-container nav button:hover {
+      background: var(--bg-btn-hover);
+      color: var(--text-btn-hover);
+      transform: translateY(-1px);
+      text-shadow: var(--accent-shadow);
+    }
+    
+    .menu-controls {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--btn-control-border);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    main {
+      flex: 1;
+      padding: 2rem;
+      text-align: center;
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      border-top: 1px solid var(--border-color);
+      font-size: 0.9rem;
+      color: var(--text-footer);
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+    
+    footer a {
+      color: var(--text-footer);
+      text-decoration: none;
+      cursor: default;
+    }
+    
+    footer a:hover {
+      color: var(--accent-color);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .page { display: none; animation: fadeIn 0.28s ease; }
+    .active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    a { 
+      color: var(--link-color); 
+      text-decoration: none; 
+      text-shadow: var(--accent-shadow);
+    }
+    a:hover { text-decoration: underline; }
+
+    h2 { 
+      margin-bottom: 0.75rem; 
+      color: var(--text-h2); 
+      text-shadow: var(--accent-shadow);
+      transition: text-shadow 0.2s ease;
+    }
+    p { margin-bottom: 1rem; color: var(--text-p); }
+    
+    ul { 
+      list-style: none; 
+      padding: 0; 
+      margin-top: 1.5rem; 
+      text-align: left;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    ul li { 
+      margin-bottom: 0.75rem; 
+      color: var(--text-p); 
+      background: var(--bg-li);
+      padding: 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+    
+    code { 
+      background: var(--bg-code); 
+      padding: 0.12rem 0.32rem; 
+      border-radius: 6px; 
+      color: var(--text-code); 
+      font-family: monospace;
+    }
+
+    @media (max-width: 420px) {
+      main { padding: 1.5rem 1rem; }
+      header { padding: 1rem; }
+    }
   </style>
 </head>
 <body>
-  <div class="box">Test</div>
+
+  <div id="menu-overlay"></div>
+  
+  <div id="menu-container">
+    <nav>
+      <button onclick="showPage('home')" data-key="navHome">Home</button>
+      <button onclick="showPage('kernels')" data-key="navKernels">Kernels</button>
+      <button onclick="showPage('recoveries')" data-key="navRecoveries">Recoveries</button>
+      <button onclick="showPage('roms')" data-key="navRoms">ROMs</button>
+      <button onclick="showPage('tools')" data-key="navTools">Tools</button>
+      
+      <div class="menu-controls">
+        <button id="lang-toggle" data-key="langToggle">Español</button>
+        <button id="theme-toggle" data-key="themeToggleLight">Light Mode</button>
+      </div>
+    </nav>
+  </div>
+
+  <header>
+    <div class="header-title">
+      <button id="back-to-home" onclick="showPage('home')">
+        <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+      </button>
+      <h1 data-key="title">My Resource Site</h1>
+    </div>
+    <button id="menu-toggle">
+      <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+    </button>
+  </header>
+
+  <main>
+    <section id="home" class="page active">
+      <h2 data-key="homeTitle">Welcome to the Resource Page</h2>
+      <p data-key="homeDesc">Select a category in the navigation menu to find what you're looking for.</p>
+    </section>
+
+    <section id="kernels" class="page">
+      <h2 data-key="kernelsTitle">Kernels</h2>
+      <p data-key="kernelsDesc">Links to kernels will be added soon.</p>
+      <ul>
+      </ul>
+    </section>
+
+    <section id="recoveries" class="page">
+      <h2 data-key="recoveriesTitle">Recoveries</h2>
+      <p data-key="recoveriesDesc">Links to recoveries will be added soon.</p>
+      <ul>
+      </ul>
+    </section>
+
+    <section id="roms" class="page">
+      <h2 data-key="romsTitle">ROMs</h2>
+      <p data-key="romsDesc">Links to ROMs will be added soon.</p>
+      <ul>
+      </ul>
+    </section>
+
+    <section id="tools" class="page">
+      <h2 data-key="toolsTitle">Tools & Instructions</h2>
+      <p data-key="toolsDesc">Links to useful tools will be added soon.</p>
+      <ul>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <a href="#" data-key="footer" data-key-title="footerTitle">By elmendezz n Sheff </a>
+  </footer>
+
+  <script>
+    const translations = {
+      en: {
+        title: "A03 Core Modding",
+        navHome: "Home",
+        navKernels: "Kernels",
+        navRecoveries: "Recoveries",
+        navRoms: "ROMs",
+        navTools: "Tools",
+        langToggle: "Español",
+        themeToggleLight: "Light Mode",
+        themeToggleDark: "Dark Mode",
+        homeTitle: "Welcome to the Resource Page",
+        homeDesc: "Hello everyone! Sheff and me (elmendezz) present this website about resources and file downloads for the Samsung Galaxy A03 Core device.",
+        kernelsTitle: "Kernels",
+        kernelsDesc: "Links to kernels will be added soon.",
+        recoveriesTitle: "Recoveries",
+        recoveriesDesc: "Links to recoveries will be added soon.",
+        romsTitle: "ROMs",
+        romsDesc: "Links to ROMs will be added soon.",
+        toolsTitle: "Tools & Instructions",
+        toolsDesc: "Links to useful tools will be added soon.",
+        footer: "by elmendezz n Sheff.",
+        footerTitle: "Link not available yet"
+      },
+      es: {
+        title: "A03 Core Modding",
+        navHome: "Inicio",
+        navKernels: "Kernels",
+        navRecoveries: "Recoveries",
+        navRoms: "ROMs",
+        navTools: "Herramientas",
+        langToggle: "English",
+        themeToggleLight: "Modo Claro",
+        themeToggleDark: "Modo Oscuro",
+        homeTitle: "Bienvenido a la Página de Recursos",
+        homeDesc: "¡Hola a todos!, Yo (elmendezz) y Sheff les presentamos la página web sobre recursos y descargas de archivos del Dispositivo Samsung Galaxy A03 Core",
+        kernelsTitle: "Kernels",
+        kernelsDesc: "Próximamente se añadirán enlaces a kernels.",
+        recoveriesTitle: "Recoveries",
+        recoveriesDesc: "Próximamente se añadirán enlaces a recoveries.",
+        romsTitle: "ROMs",
+        romsDesc: "Próximamente se añadirán enlaces a ROMs.",
+        toolsTitle: "Herramientas e Instrucciones",
+        toolsDesc: "Próximamente se añadirán enlaces a herramientas útiles.",
+        footer: "por elmendezz y Sheff",
+        footerTitle: "Enlace no disponible todavía"
+      }
+    };
+    
+    let currentLang = 'en';
+    const bodyEl = document.body;
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const langToggleBtn = document.getElementById('lang-toggle');
+    const backToHomeBtn = document.getElementById('back-to-home');
+    const menuToggleBtn = document.getElementById('menu-toggle');
+    const menuOverlay = document.getElementById('menu-overlay');
+    const menuNavButtons = document.querySelectorAll('#menu-container nav button');
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      
+      document.querySelectorAll('[data-key]').forEach(el => {
+        const key = el.getAttribute('data-key');
+        if (translations[lang] && translations[lang][key]) {
+          if (key === 'themeToggleLight') {
+             el.textContent = bodyEl.classList.contains('light-theme') ? translations[lang].themeToggleDark : translations[lang].themeToggleLight;
+          } else {
+            el.textContent = translations[lang][key];
+          }
+        }
+      });
+      
+      document.querySelectorAll('[data-key-title]').forEach(el => {
+          const key = el.getAttribute('data-key-title');
+          if (translations[lang] && translations[lang][key]) {
+            el.setAttribute('title', translations[lang][key]);
+          }
+      });
+      
+      document.documentElement.lang = lang;
+    }
+
+    function showPage(pageId) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById(pageId).classList.add('active');
+      
+      if (pageId === 'home') {
+        backToHomeBtn.style.display = 'none';
+      } else {
+        backToHomeBtn.style.display = 'block';
+      }
+      
+      closeMenu();
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    }
+
+    function toggleTheme() {
+      bodyEl.classList.toggle('light-theme');
+      const isLight = bodyEl.classList.contains('light-theme');
+      themeToggleBtn.textContent = isLight ? translations[currentLang].themeToggleDark : translations[currentLang].themeToggleLight;
+    }
+    
+    function toggleLang() {
+      const newLang = currentLang === 'en' ? 'es' : 'en';
+      setLanguage(newLang);
+    }
+    
+    function openMenu() {
+      bodyEl.classList.add('menu-open');
+    }
+    
+    function closeMenu() {
+      bodyEl.classList.remove('menu-open');
+    }
+
+    themeToggleBtn.addEventListener('click', toggleTheme);
+    langToggleBtn.addEventListener('click', toggleLang);
+    menuToggleBtn.addEventListener('click', openMenu);
+    menuOverlay.addEventListener('click', closeMenu);
+
+    setLanguage(currentLang);
+    showPage('home');
+  </script>
 </body>
-</html>
+  </html>
